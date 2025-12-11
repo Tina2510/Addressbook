@@ -79,4 +79,23 @@ public class AddressBookMain {
 
         System.out.println("Contact not found.");
     }
+    public static void deleteContact(AddressBook ab) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter First Name of contact to delete: ");
+        String name = sc.nextLine();
+
+        Iterator<Contact> it = ab.contacts.iterator();
+        while (it.hasNext()) {
+            Contact c = it.next();
+            if (c.firstName.equalsIgnoreCase(name)) {
+                it.remove();
+                System.out.println("Contact deleted successfully!");
+                return;
+            }
+        }
+
+        System.out.println("Contact not found.");
+    }
+
 }
