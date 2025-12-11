@@ -3,6 +3,7 @@ public class AddressBookMain {
     static class Contact {
         String firstName, lastName, address, city, state, zip, phone, email;
 
+
         Contact(String fn, String ln, String address, String city, String state,
                 String zip, String phone, String email) {
             this.firstName = fn;
@@ -108,6 +109,45 @@ public class AddressBookMain {
             if (!choice.equalsIgnoreCase("y")) {
                 break;
             }
+        }
+    }
+    static Map<String, AddressBook> addressBookDict = new HashMap<>();
+    public static AddressBook createAddressBook() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter AddressBook name: ");
+        String name = sc.nextLine();
+
+        if (addressBookDict.containsKey(name)) {
+            System.out.println("AddressBook already exists. Switching to it.");
+            return addressBookDict.get(name);
+        }
+
+        AddressBook ab = new AddressBook();
+        addressBookDict.put(name, ab);
+        System.out.println("AddressBook '" + name + "' created!");
+        return ab;
+    }
+
+
+    public static AddressBook switchAddressBook() {
+        Scanner sc = new Scanner(System.in);
+
+        if (addressBookDict.isEmpty()) {
+            System.out.println("No AddressBooks found. Creating a default one.");
+            AddressBook defaultAB = new AddressBook();
+            addressBookDict.put("Default", defaultAB);
+            return defaultAB;
+        }
+
+        System.out.println("Available AddressBooks: " + addressBookDict.keySet());
+        System.out.print("Enter AddressBook name to switch: ");
+        String name = sc.nextLine();
+
+        if (addressBookDict.containsKey(name)) {
+            return addressBookDict.get(name);
+        } else {
+            System.out.println("AddressBook not found.");
+            return null;
         }
     }
 
