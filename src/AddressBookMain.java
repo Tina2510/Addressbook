@@ -47,12 +47,36 @@ public class AddressBookMain {
 
             return new Contact(fn, ln, address, city, state, zip, phone, email);
         }
-    public static void addContact(AddressBook ab) {
+        public static void addContact(AddressBook ab) {
         Contact newContact = createContact();
         ab.contacts.add(newContact);
         System.out.println("Contact added successfully!");
+        }
+    public static void editContact(AddressBook ab) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter First Name of contact to edit: ");
+        String name = sc.nextLine();
+
+        for (Contact c : ab.contacts) {
+            if (c.firstName.equalsIgnoreCase(name)) {
+                System.out.println("Enter new details:");
+                Contact updated = createContact();
+
+                c.firstName = updated.firstName;
+                c.lastName = updated.lastName;
+                c.address = updated.address;
+                c.city = updated.city;
+                c.state = updated.state;
+                c.zip = updated.zip;
+                c.phone = updated.phone;
+                c.email = updated.email;
+
+                System.out.println("Contact updated successfully!");
+                return;
+            }
+        }
+
+        System.out.println("Contact not found.");
     }
-
-
-
 }
