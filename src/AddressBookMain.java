@@ -150,6 +150,55 @@ public class AddressBookMain {
             return null;
         }
     }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        AddressBook currentBook = createAddressBook(); // create first address book
+
+        while (true) {
+            System.out.println("\n--- Address Book Menu ---");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Edit Contact");
+            System.out.println("3. Delete Contact");
+            System.out.println("4. Add Multiple Contacts");
+            System.out.println("5. Create New AddressBook");
+            System.out.println("6. Switch AddressBook");
+            System.out.println("7. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = sc.nextInt();
+            sc.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    addContact(currentBook);
+                    break;
+                case 2:
+                    editContact(currentBook);
+                    break;
+                case 3:
+                    deleteContact(currentBook);
+                    break;
+                case 4:
+                    addMultipleContacts(currentBook);
+                    break;
+                case 5:
+                    currentBook = createAddressBook();
+                    break;
+                case 6:
+                    AddressBook switched = switchAddressBook();
+                    if (switched != null) {
+                        currentBook = switched;
+                        System.out.println("Switched successfully!");
+                    }
+                    break;
+                case 7:
+                    System.out.println("Exiting program.");
+                    return;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
 
 
 }
