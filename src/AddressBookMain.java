@@ -97,5 +97,19 @@ public class AddressBookMain {
 
         System.out.println("Contact not found.");
     }
+    public static void addMultipleContacts(AddressBook ab) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            addContact(ab);  // Reuse UC2 method
+
+            System.out.print("Add another contact? (y/n): ");
+            String choice = sc.nextLine();
+
+            if (!choice.equalsIgnoreCase("y")) {
+                break;
+            }
+        }
+    }
+
 
 }
